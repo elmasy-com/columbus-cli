@@ -17,6 +17,11 @@ func HelpPrint() {
 	fmt.Printf("The server URI can be changed by setting the COLUMBUS_URI environment variable\n")
 }
 
+var (
+	Version string
+	Commit  string
+)
+
 func main() {
 
 	if len(os.Args) == 1 {
@@ -31,6 +36,9 @@ func main() {
 		Insert()
 	case "help":
 		HelpPrint()
+	case "version":
+		fmt.Printf("Version: %s\n", Version)
+		fmt.Printf("Commit: %s\n", Commit)
 	default:
 		fmt.Fprintf(os.Stderr, "Unkown command: %s\n", os.Args[1])
 		os.Exit(1)
