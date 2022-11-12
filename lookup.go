@@ -14,7 +14,7 @@ func LookupHelp() {
 	fmt.Printf("Examples:\n")
 	fmt.Printf("%s lookup example.com	-> Lookup for example.com\n", os.Args[0])
 	fmt.Printf("\n")
-	fmt.Printf("Returns a newline separated list of the full hostnames\n")
+	fmt.Printf("Returns a newline separated list of the full hostnames.\n")
 }
 
 func lookup(d string) {
