@@ -12,9 +12,10 @@ func HelpPrint() {
 	fmt.Printf("Commands:\n")
 	fmt.Printf("	lookup		Lookup domain\n")
 	fmt.Printf("	insert		Insert domain\n")
+	fmt.Printf("	help		Print this help\n")
 	fmt.Printf("\n")
 	fmt.Printf("The API key must be set in COLUMBUS_KEY environment variable!\n")
-	fmt.Printf("The server URI can be changed by setting the COLUMBUS_URI environment variable\n")
+	fmt.Printf("The server URI can be changed by setting the COLUMBUS_URI environment variable.\n")
 }
 
 var (
