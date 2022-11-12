@@ -15,8 +15,8 @@ Insert is requires an API key!. To use the API key, set the `COLUMBUS_KEY` envir
 ## Install
 
 ```bash
-wget -q 'https://github.com/elmasy-com/columbus-cli/releases/latest/download/columbus' &&\
-wget -q 'https://github.com/elmasy-com/columbus-cli/releases/latest/download/columbus.sha' &&\
+wget -q 'https://github.com/elmasy-com/columbus-cli/releases/latest/download/columbus' -O columbus && \
+wget -q 'https://github.com/elmasy-com/columbus-cli/releases/latest/download/columbus.sha' -O columbus.sha && \
 sha512sum -c columbus.sha && rm columbus.sha && chmod +x columbus
 ```
 
