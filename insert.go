@@ -98,6 +98,10 @@ func Insert() {
 		os.Exit(1)
 	}
 
+	if os.Args[2] == "help" {
+		InsertHelp()
+		os.Exit(0)
+	}
 	if os.Getenv("COLUMBUS_URI") != "" {
 		sdk.SetURI(os.Getenv("COLUMBUS_URI"))
 	}
@@ -114,9 +118,6 @@ func Insert() {
 	}
 
 	switch os.Args[2] {
-	case "help":
-		InsertHelp()
-		os.Exit(0)
 	case "input":
 		insertInput()
 	case "file":
