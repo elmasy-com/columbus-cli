@@ -5,6 +5,7 @@ import (
 	"os"
 
 	sdk "github.com/elmasy-com/columbus-sdk"
+	"github.com/elmasy-com/elnet/domain"
 )
 
 func LookupHelp() {
@@ -19,13 +20,18 @@ func LookupHelp() {
 
 func lookup(d string) {
 
+	if !domain.IsValid(d) {
+		fmt.Fprintf(os.Stderr, "Failed to lookup for %s: invalid domain\n", d)
+		os.Exit(1)
+	}
+
 	if os.Getenv("COLUMBUS_URI") != "" {
 		sdk.SetURI(os.Getenv("COLUMBUS_URI"))
 	}
 
 	subs, err := sdk.Lookup(d, false)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Lookup failed: %s\n", err)
+		fmt.Fprintf(os.Stderr, "Failed to lookup for %s: %s\n", d, err)
 		os.Exit(1)
 	}
 

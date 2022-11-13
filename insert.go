@@ -2,12 +2,11 @@ package main
 
 import (
 	"bufio"
-	"errors"
 	"fmt"
 	"os"
 
 	sdk "github.com/elmasy-com/columbus-sdk"
-	"github.com/elmasy-com/columbus-sdk/fault"
+	"github.com/elmasy-com/elnet/domain"
 )
 
 func InsertHelp() {
@@ -32,16 +31,16 @@ func insertInput() {
 	scanner := bufio.NewScanner(os.Stdin)
 
 	for scanner.Scan() {
-		d := scanner.Text()
 
-		err := sdk.Insert(d)
+		if !domain.IsValid(scanner.Text()) {
+			fmt.Fprintf(os.Stderr, "Failed to insert %s: invalid domain\n", scanner.Text())
+			continue
+		}
+
+		err := sdk.Insert(scanner.Text())
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "Failed to insert %s: %s\n", d, err)
-
-			// Exit when error is othen than "invalid domain"
-			if !errors.Is(err, fault.ErrInvalidDomain) {
-				os.Exit(1)
-			}
+			fmt.Fprintf(os.Stderr, "Failed to insert %s: %s\n", scanner.Text(), err)
+			os.Exit(1)
 		}
 	}
 
@@ -55,7 +54,7 @@ func insertFile(path string) {
 
 	file, err := os.OpenFile(path, os.O_RDONLY, 0644)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Failed to open file: %s\n", err)
+		fmt.Fprintf(os.Stderr, "Failed to open %s: %s\n", path, err)
 		os.Exit(1)
 	}
 	defer file.Close()
@@ -64,14 +63,15 @@ func insertFile(path string) {
 
 	for scanner.Scan() {
 
+		if !domain.IsValid(scanner.Text()) {
+			fmt.Fprintf(os.Stderr, "Failed to insert %s: invalid domain\n", scanner.Text())
+			continue
+		}
+
 		err := sdk.Insert(scanner.Text())
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "Failed to insert %s: %s\n", scanner.Text(), err)
-
-			// Exit when error is othen than "invalid domain"
-			if !errors.Is(err, fault.ErrInvalidDomain) {
-				os.Exit(1)
-			}
+			os.Exit(1)
 		}
 	}
 
@@ -82,6 +82,11 @@ func insertFile(path string) {
 }
 
 func insert(d string) {
+
+	if !domain.IsValid(d) {
+		fmt.Fprintf(os.Stderr, "Failed to insert %s: invalid domain\n", d)
+		os.Exit(1)
+	}
 
 	err := sdk.Insert(d)
 	if err != nil {
@@ -122,7 +127,7 @@ func Insert() {
 		insertInput()
 	case "file":
 		if len(os.Args) < 4 {
-			fmt.Fprintf(os.Stderr, "File is missing!\n")
+			fmt.Fprintf(os.Stderr, "File path is missing!\n")
 			os.Exit(1)
 		}
 		insertFile(os.Args[3])
