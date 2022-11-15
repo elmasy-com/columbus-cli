@@ -7,5 +7,4 @@ build:
 	go build -o columbus -ldflags="$(LDFLAGS)" .
 
 release: build
-	# Use goreleaser!
 	sha512sum columbus > columbus.sha
