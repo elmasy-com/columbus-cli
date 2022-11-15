@@ -31,7 +31,7 @@ To get more info about the command: ./columbus <command> help
 Commands:
 	lookup		Lookup domain
 	insert		Insert domain
-    help        Print this help
+	help		Print this help
 
 The API key must be set in COLUMBUS_KEY environment variable!
 The server URI can be changed by setting the COLUMBUS_URI environment variable.
@@ -60,6 +60,8 @@ Insert `<domain>` into the Columbus Database.
 - On sucess, returns nothing with code 0. Duplications are silently ignored and count as a sucessful insert.
 - On error, returns the error message and code 1.
 
+When using `input` or `file`, an invalid domain does not stop the process, only print the error to stderr.
+
 ```bash
 columbus insert help
 ```
@@ -67,7 +69,7 @@ columbus insert help
 Usage: ./columbus insert <domain>
 
 If <domain> is "input", then reads domains from the standard input.
-If <domain> is "file <path>" then read domains from the given file file.
+If <domain> is "file <path>" then read domains from the given file.
 
 Examples:
 echo 'example.com
@@ -76,6 +78,6 @@ www.example.com' | ./columbus insert input	-> Read and insert example.com and ww
 ./columbus insert example.com			-> Insert example.com
 
 IMPORTANT:
-If "input" or "file" selected, than the domains must be newline separated (one domain per line).
+If "input" or "file" selected, than the domains must be newline separated list (one domain per line).
 This command requires a valid API key! Set API key in the COLUMBUS_KEY environment variable
 ```

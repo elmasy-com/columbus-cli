@@ -14,7 +14,7 @@ func InsertHelp() {
 	fmt.Printf("Usage: %s insert <domain>\n", os.Args[0])
 	fmt.Printf("\n")
 	fmt.Printf("If <domain> is \"input\", then reads domains from the standard input.\n")
-	fmt.Printf("If <domain> is \"file <path>\" then read domains from the given file file.\n")
+	fmt.Printf("If <domain> is \"file <path>\" then read domains from the given file.\n")
 	fmt.Printf("\n")
 	fmt.Printf("Examples:\n")
 	fmt.Printf("echo 'example.com\nwww.example.com' | %s insert input	-> Read and insert example.com and www.example.com\n", os.Args[0])
@@ -22,10 +22,11 @@ func InsertHelp() {
 	fmt.Printf("%s insert example.com			-> Insert example.com\n", os.Args[0])
 	fmt.Printf("\n")
 	fmt.Printf("IMPORTANT:\n")
-	fmt.Printf("If \"input\" or \"file\" selected, than the domains must be newline separated (one domain per line).\n")
+	fmt.Printf("If \"input\" or \"file\" selected, than the domains must be newline separated list (one domain per line).\n")
 	fmt.Printf("This command requires a valid API key! Set API key in the COLUMBUS_KEY environment variable\n")
 }
 
+// Insert domain(s) from input.
 func insertInput() {
 
 	scanner := bufio.NewScanner(os.Stdin)
@@ -50,6 +51,7 @@ func insertInput() {
 	}
 }
 
+// Insert domain(s) from file in path.
 func insertFile(path string) {
 
 	file, err := os.OpenFile(path, os.O_RDONLY, 0644)
@@ -81,6 +83,7 @@ func insertFile(path string) {
 	}
 }
 
+// Insert a single domain.
 func insert(d string) {
 
 	if !domain.IsValid(d) {
@@ -107,6 +110,7 @@ func Insert() {
 		InsertHelp()
 		os.Exit(0)
 	}
+
 	if os.Getenv("COLUMBUS_URI") != "" {
 		sdk.SetURI(os.Getenv("COLUMBUS_URI"))
 	}
