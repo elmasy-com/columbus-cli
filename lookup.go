@@ -8,7 +8,7 @@ import (
 	"github.com/elmasy-com/elnet/domain"
 )
 
-func LookupHelp() {
+func lookupHelp() {
 
 	fmt.Printf("Usage: %s lookup <domain>\n", os.Args[0])
 	fmt.Printf("\n")
@@ -53,7 +53,7 @@ func Lookup() {
 	}
 	switch os.Args[2] {
 	case "help":
-		LookupHelp()
+		lookupHelp()
 	default:
 		lookup(os.Args[2])
 	}
