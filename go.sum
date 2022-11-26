@@ -1,6 +1,14 @@
-github.com/elmasy-com/columbus-sdk v0.2.1 h1:JTE3QEGI9xEudoIMxBOAGGTa2cLW/94YyKQl4hyLYO4=
-github.com/elmasy-com/columbus-sdk v0.2.1/go.mod h1:zpnOQxRzeBP/fe5+KzGvp4oSi6+c/vSS09Vut5AUYC4=
+github.com/elmasy-com/columbus-sdk v0.3.0 h1:uGg3EL/bEbdLS0zbT/Ep0y3WdzOn7o0cfWkLxnncIEM=
+github.com/elmasy-com/columbus-sdk v0.3.0/go.mod h1:8yzWwkSKVJnR/bHIfLFNCYs5RumVecI2+ATLlrvKqJQ=
 github.com/elmasy-com/elnet v0.0.0-20221113174715-3e8d065056ee h1:Nk/BpLnVsiUz317DBx5kfB7DmAplxMHbPwq4Ns2vHLY=
 github.com/elmasy-com/elnet v0.0.0-20221113174715-3e8d065056ee/go.mod h1:RtpuBBKp+kXX7hZAE5s7Y+db3RruHrEE/an3HxyXDH0=
+github.com/mattn/go-runewidth v0.0.9/go.mod h1:H031xJmbD/WCDINGzjvQ9THkh0rPKHF+m2gUSrubnMI=
+github.com/mattn/go-runewidth v0.0.14 h1:+xnbZSEeDbOIg5/mE6JF0w6n9duR1l3/WmbinWVwUuU=
+github.com/mattn/go-runewidth v0.0.14/go.mod h1:Jdepj2loyihRzMpdS35Xk/zdY8IAYHsh153qUoGf23w=
+github.com/olekukonko/tablewriter v0.0.5 h1:P2Ga83D34wi1o9J6Wh1mRuqd4mF/x/lgBS7N7AbDhec=
+github.com/olekukonko/tablewriter v0.0.5/go.mod h1:hPp6KlRPjbx+hW8ykQs1w3UBbZlj6HuIJcUGPhkA7kY=
+github.com/rivo/uniseg v0.2.0/go.mod h1:J6wj4VEh+S6ZtnVlnTBMWIodfgj8LQOQFoIToxlJtxc=
+github.com/rivo/uniseg v0.4.3 h1:utMvzDsuh3suAEnhH0RdHmoPbU648o6CvXxTx4SBMOw=
+github.com/rivo/uniseg v0.4.3/go.mod h1:FN3SvrM+Zdj16jyLfmOkMNblXMcoc8DfTHruCPUcx88=
 golang.org/x/net v0.2.0 h1:sZfSu1wtKLGlWI4ZZayP0ck9Y73K1ynO6gqzTdBVdPU=
 golang.org/x/net v0.2.0/go.mod h1:KqCZLdyyvdV855qA2rE3GC2aiw5xGR5TEjj8smXukLY=
