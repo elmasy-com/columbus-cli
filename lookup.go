@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	sdk "github.com/elmasy-com/columbus-sdk"
 	"github.com/elmasy-com/elnet/domain"
@@ -10,12 +11,14 @@ import (
 
 func lookupHelp() {
 
-	fmt.Printf("Usage: %s lookup <domain>\n", os.Args[0])
+	fmt.Printf("USAGE\n")
+	fmt.Printf("	%s lookup <domain>\n", os.Args[0])
 	fmt.Printf("\n")
-	fmt.Printf("Examples:\n")
-	fmt.Printf("%s lookup example.com	-> Lookup for example.com\n", os.Args[0])
+	fmt.Printf("RETURN\n")
+	fmt.Printf("	Returns a newline separated list of the full hostnames.\n")
 	fmt.Printf("\n")
-	fmt.Printf("Returns a newline separated list of the full hostnames.\n")
+	fmt.Printf("EXAMPLE\n")
+	fmt.Printf("	%s lookup example.com	-> Lookup for subdomains of example.com\n", os.Args[0])
 }
 
 func lookup(d string) {
@@ -46,15 +49,24 @@ func lookup(d string) {
 
 func Lookup() {
 
+	// Fewer arguments than needed
 	if len(os.Args) < 3 {
 		fmt.Fprintf(os.Stderr, "Domain for lookup is missing!\n")
 		fmt.Fprintf(os.Stderr, "Use \"%s lookup help\" to get help.\n", os.Args[0])
 		os.Exit(1)
 	}
-	switch os.Args[2] {
-	case "help":
-		lookupHelp()
-	default:
-		lookup(os.Args[2])
+
+	// More arguments than needed
+	if len(os.Args) > 3 {
+		fmt.Fprintf(os.Stderr, "Too much arguments: %s\n", strings.Join(os.Args[2:], " "))
+		fmt.Fprintf(os.Stderr, "Use \"%s lookup help\" to get help.\n", os.Args[0])
+		os.Exit(1)
 	}
+
+	if os.Args[2] == "help" {
+		lookupHelp()
+		os.Exit(0)
+	}
+
+	lookup(os.Args[2])
 }
