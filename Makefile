@@ -8,10 +8,12 @@ dev:
 	go build -o columbus --race -ldflags="$(LDFLAGS)" .
 
 clean:
-	@if [ -f "./columbus" ]; then rm columbus; fi  
+	@if [ -f "./columbus" ]; then rm columbus; fi
+	@if [ -f "./checksums" ]; then rm checksums; fi  
 	@if [ -f "./columbus-linux-amd64" ]; then rm columbus-linux-amd64; fi
-	@if [ -f "./columbus-linux-arm64 " ]; then rm columbus-linux-arm64 ; fi
-	@if [ -f "./columbus-darwin-arm64" ]; then rm columbus-darwin-arm64; fi  
+	@if [ -f "./columbus-linux-arm64" ]; then rm columbus-linux-arm64 ; fi
+	@if [ -f "./columbus-darwin-arm64" ]; then rm columbus-darwin-arm64; fi
+	@if [ -f "./columbus-darwin-amd64" ]; then rm columbus-darwin-amd64; fi  
 	@if [ -f "./columbus-windows-amd64" ]; then rm columbus-windows-amd64; fi  
 
 build-linux-amd64:
