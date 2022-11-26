@@ -28,11 +28,10 @@ build-darwin-arm64:
 build-darwin-amd64:
 	GOOS=darwin  GOARCH=amd64 go build -o columbus-darwin-amd64  -ldflags="$(LDFLAGS)" .
 
-build-darwin: build-darwin-arm64
+build-darwin: build-darwin-arm64 build-darwin-amd64
 
 build-windows-amd64:
 	GOOS=windows GOARCH=amd64 go build -o columbus-windows-amd64 -ldflags="$(LDFLAGS)" .
-
 
 build-windows: build-windows-amd64
 
