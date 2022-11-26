@@ -4,26 +4,28 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strings"
 
 	sdk "github.com/elmasy-com/columbus-sdk"
 	"github.com/elmasy-com/elnet/domain"
 )
 
-func InsertHelp() {
+func insertHelp() {
 
-	fmt.Printf("Usage: %s insert <domain>\n", os.Args[0])
+	fmt.Printf("USAGE\n")
+	fmt.Printf("	%s insert <domain>\n", os.Args[0])
 	fmt.Printf("\n")
-	fmt.Printf("If <domain> is \"input\", then reads domains from the standard input.\n")
-	fmt.Printf("If <domain> is \"file <path>\" then read domains from the given file.\n")
+	fmt.Printf("	If <domain> is \"input\", then reads domains from the standard input.\n")
+	fmt.Printf("	If <domain> is \"file <path>\" then read domains from the given file.\n")
 	fmt.Printf("\n")
-	fmt.Printf("Examples:\n")
-	fmt.Printf("echo 'example.com\nwww.example.com' | %s insert input	-> Read and insert example.com and www.example.com\n", os.Args[0])
-	fmt.Printf("%s insert file /path/to/domains		-> Insert domains from the file\n", os.Args[0])
-	fmt.Printf("%s insert example.com			-> Insert example.com\n", os.Args[0])
-	fmt.Printf("\n")
-	fmt.Printf("IMPORTANT:\n")
+	fmt.Printf("INFO\n")
 	fmt.Printf("If \"input\" or \"file\" selected, than the domains must be newline separated list (one domain per line).\n")
 	fmt.Printf("This command requires a valid API key! Set API key in the COLUMBUS_KEY environment variable\n")
+	fmt.Printf("\n")
+	fmt.Printf("EXAMPLE\n")
+	fmt.Printf("	echo 'example.com\\nwww.example.com' | %s insert input	-> Read and insert example.com and www.example.com\n", os.Args[0])
+	fmt.Printf("	%s insert file /path/to/domains				-> Insert domains from the file\n", os.Args[0])
+	fmt.Printf("	%s insert example.com					-> Insert example.com\n", os.Args[0])
 }
 
 // Insert domain(s) from input.
@@ -84,7 +86,7 @@ func insertFile(path string) {
 }
 
 // Insert a single domain.
-func insert(d string) {
+func insertOne(d string) {
 
 	if !domain.IsValid(d) {
 		fmt.Fprintf(os.Stderr, "Failed to insert %s: invalid domain\n", d)
@@ -100,14 +102,23 @@ func insert(d string) {
 
 func Insert() {
 
+	// Fewer arguments than needed
 	if len(os.Args) < 3 {
 		fmt.Fprintf(os.Stderr, "Domain for insert is missing!\n")
 		fmt.Fprintf(os.Stderr, "Use \"%s insert help\" to get help\n", os.Args[0])
 		os.Exit(1)
 	}
 
+	// More arguments than needed
+	if len(os.Args) > 3 {
+		fmt.Fprintf(os.Stderr, "Too much arguments: %s\n", strings.Join(os.Args[2:], " "))
+		fmt.Fprintf(os.Stderr, "Use \"%s lookup help\" to get help.\n", os.Args[0])
+		os.Exit(1)
+	}
+
+	// Able to print help before getting COLUMBUS_KEY
 	if os.Args[2] == "help" {
-		InsertHelp()
+		insertHelp()
 		os.Exit(0)
 	}
 
@@ -136,6 +147,6 @@ func Insert() {
 		}
 		insertFile(os.Args[3])
 	default:
-		insert(os.Args[2])
+		insertOne(os.Args[2])
 	}
 }
