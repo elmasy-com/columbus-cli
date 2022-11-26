@@ -28,6 +28,16 @@ gpg --verify checksums && sha512sum --ignore-missing -c checksums && rm checksum
 mv columbus-linux-amd64 columbus && chmod +x columbus
 ```
 
+### Build
+
+Requirements:
+- `go 1.19+`
+
+Clone the repository and build with the standard build command:
+```bash
+go build -o columbus .
+```
+
 ## Usage
 
 ```bash
