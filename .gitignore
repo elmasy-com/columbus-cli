@@ -1,2 +1,7 @@
 columbus
-columbus.sha
+checksums
+columbus-linux-amd64
+columbus-linux-arm64
+columbus-darwin-arm64
+columbus-darwin-amd64
+columbus-windows-amd64
